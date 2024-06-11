@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&display=swap');
+:root{
+    --backgroun-color: #0C0410;
+    --primary-font:  #FEFFFF;
+    --primary-color: #BA0BF9;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Antonio", sans-serif;
+    font-weight: 400;
+    color: var(--primary-font)
+}
+#menu-id{
+    width:175px;
+    text-align: right;
+}
+@media only screen and (min-width: 200px) and (max-width: 760px) {
+    .nav{
+        font-size: 16px;
+    }
+}
+.container{
+    padding: 0px 40px;
+}
+body{
+    background-color: var(--backgroun-color);
+}

@@ -1,0 +1,9 @@
+:root {
+    --primary-color: black;
+    --secondary-color: green;
+    --font-primary-color: white;
+    --font-secondary-color: #f48e28;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+}

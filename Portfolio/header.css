@@ -1,0 +1,134 @@
+.header-container {
+    height: 100vh;
+    background-color: var(--background-color);
+    background-image: url(./Image/banner/Rectangle\ 5.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+.nav {
+    padding-top: 20px;
+    color: var(--primary-font);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 36px;
+}
+
+.banner-title h1 {
+    font-size: 152px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    letter-spacing: 5px;
+    margin: 40px 0px;
+}
+
+.banner-desc {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    letter-spacing: 0px;
+    margin: 20px 0px;
+}
+
+.banner-profile-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    font-size: 40px;
+}
+
+.work-icon-container {
+    display: flex;
+    gap: 5px;
+    padding: 20px 0px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--primary-font);
+}
+
+.tick-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.banner-profile {
+    background-color: var(--primary-font);
+    width: fit-content;
+}
+
+.banner-profile-container {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--primary-font);
+    border-bottom: 1px solid var(--primary-font);
+}
+
+#profile {
+    height: 300px;
+}
+
+.complete-project-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.complete-project-card h1 {
+    font-size: 152px;
+}
+
+.complete-project-card p {
+    font-size: 40px;
+}
+
+.year-experience-card h1 {
+    font-size: 152px;
+}
+
+.year-experience-card p {
+    font-size: 40px;
+}
+
+.worked-agencies-card h1 {
+    font-size: 152px;
+}
+
+.worked-agencies-card p {
+    font-size: 40px;
+}
+
+.total-clients-card h1 {
+    font-size: 152px;
+}
+
+.total-clients-card p {
+    font-size: 40px;
+}
+
+@media only screen and (min-width: 200px) and (max-width: 570px) {
+    .nav {
+        font-size: 16px;
+    }
+
+    .complete-project-container {
+        flex-direction: column;
+    }
+
+    .banner-title h1 {
+        font-size: 25px;
+        letter-spacing: 1px;
+        margin: 20px 0px;
+    }
+
+    .banner-profile-container {
+        flex-direction: column;
+    }
+
+    .complete-project-container {
+        flex-direction: column;
+    }
+
+    #profile {
+       width: 100%;
+       height: auto;
+    }
+}
