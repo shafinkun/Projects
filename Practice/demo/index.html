@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Searched Area</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div id="map" class="mb-4"></div>
+        <button id="capture-btn" class="w-full md:w-auto py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-200">
+            Capture Searched Area
+        </button>
+    </div>
+
+    <script>
+        // Initialize the map with a satellite view
+        const map = L.map('map').setView([51.505, -0.09], 5); // Adjust initial coordinates and zoom
+
+        // Satellite view layer (Esri World Imagery)
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.esri.com">Esri</a> &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
+        }).addTo(map);
+
+        // Variable to store polygon
+        let currentPolygon;
+
+        // Geocoder control for area search
+        L.Control.geocoder({
+            defaultMarkGeocode: false
+        })
+        .on('markgeocode', function(e) {
+            const bbox = e.geocode.bbox;
+
+            // Remove previous polygon if it exists
+            if (currentPolygon) {
+                map.removeLayer(currentPolygon);
+            }
+
+            // Create a polygon with the bounding box coordinates
+            currentPolygon = L.polygon([
+                bbox.getSouthEast(),
+                bbox.getNorthEast(),
+                bbox.getNorthWest(),
+                bbox.getSouthWest()
+            ], { color: 'blue' }).addTo(map);
+
+            map.fitBounds(currentPolygon.getBounds());  // Fit map to polygon bounds
+
+            // Place a marker at the searched location
+            L.marker(e.geocode.center).addTo(map)
+                .bindPopup(e.geocode.name)
+                .openPopup();
+        })
+        .addTo(map);
+
+        // Capture the map view as an image with polygon bounds
+        document.getElementById('capture-btn').addEventListener('click', () => {
+            if (currentPolygon) {
+                // Fit the map exactly to the polygon bounds without any padding
+                map.fitBounds(currentPolygon.getBounds(), { padding: [0, 0] });
+
+                // Delay to allow map to adjust
+                setTimeout(() => {
+                    // Capture the specific map area within the bounds
+                    html2canvas(document.getElementById('map'), {
+                        useCORS: true, // Handle cross-origin map tiles
+                        scale: 3,      // Higher scale for better quality
+                        logging: true, // Log canvas generation for debugging
+                        scrollX: 0,    // Disable scrollX for consistent image
+                        scrollY: 0,    // Disable scrollY for consistent image
+                    }).then(canvas => {
+                        const link = document.createElement('a');
+                        link.href = canvas.toDataURL('image/png'); // Convert canvas to image URL
+                        link.download = 'searched-area.png'; // Set the name of the downloaded file
+                        link.click(); // Trigger the download
+                    }).catch(error => {
+                        console.error('Error capturing the map:', error);
+                        alert('An error occurred while capturing the map.');
+                    });
+                }, 1000);  // Adjust delay for map rendering
+            } else {
+                alert("Please select an area before capturing.");
+            }
+        });
+    </script>
+</body>
+</html>
