@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Learning Tailwind</title>
-    <!-- <link rel="stylesheet" href="css/tailwind.css"> -->
+    <link rel="stylesheet" href="css/tailwind.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <h1 class="bg-red-500">Hi</h1>
-    <h2>Hi</h2>
-    <h3>Hi</h3>
-</body>
+  </head>
+  <body class="bg-gray-500 sm:bg-gray-400 md:bg-gray-300 lg:bg-gray-200 xl:bg-gray-100 2xl:bg-slate-50">
+    <h1
+      class="bg-red-500 font-serif hover:font-mono hover:text-2xl hover:text-white"
+    >
+      Hi
+    </h1>
+    <h2 class="font-sans font-bold py-5 px-5">Hi</h2>
+    <h3 class="font-mono">Hi</h3>
+    <h3 class="font-extrabold tracking-tighter">Shahriar</h3>
+    <h3 class="font-mono -tracking-tight">Hasnat</h3>
+    <h3 class="font-mono tracking-wide">Shafin</h3>
+    <h3 class="font-mono tracking-widest">Ahmed</h3>
+
+    <div class="">
+      <ul class="list-disc list-inside">
+        <li>Appple</li>
+        <li>Ball</li>
+        <li>Cat</li>
+        <li>Dog</li>
+      </ul>
+    </div>
+    <div class="flex">
+      <div
+        class="h-10 w-10 border-2 border-black bg-green-600 mx-auto rounded-lg"
+      ></div>
+      <div class="h-10 w-10 ring-red-500 bg-green-600 mx-auto rounded-lg"></div>
+    </div>
+  </body>
 </html>
